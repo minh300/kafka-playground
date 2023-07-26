@@ -6,7 +6,8 @@ import com.launchdarkly.eventsource.EventSource;
 import com.launchdarkly.eventsource.background.BackgroundEventHandler;
 import com.launchdarkly.eventsource.background.BackgroundEventSource;
 
-public class UrlEventSource implements IEventSource {
+//no longer needed?
+public class UrlEventSource {
 
 	private final BackgroundEventSource eventSource;
 	
@@ -16,7 +17,6 @@ public class UrlEventSource implements IEventSource {
         this.eventSource = backGroundEventSourcebuilder.build();
 	}
 
-	@Override
 	public void start() {
 		eventSource.start();
 	}
