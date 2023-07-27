@@ -19,6 +19,31 @@
 				<directory>${project.basedir}/src/main/resources</directory>
 			</resource>
 		</resources>
+		<plugins>
+	    <plugin>    
+	        <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <release>11</release>
+            </configuration>
+	    </plugin>			
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                     <configuration>
+                        <excludeGroupIds>org.apache.kafka</excludeGroupIds>
+                    </configuration>                 
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>			
+		</plugins>		
 	</build>
 
 	<dependencies>
@@ -31,7 +56,7 @@
 		<dependency>
 		    <groupId>org.apache.kafka</groupId>
 		    <artifactId>connect-api</artifactId>
-		    <version>3.5.1</version>
+		    <version>3.5.0</version>
 		</dependency>
 	</dependencies>
 </project>
