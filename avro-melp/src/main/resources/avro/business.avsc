@@ -1,0 +1,50 @@
+{
+     "type": "record",
+     "namespace": "com.minh.avro",
+     "name": "Business",
+     "fields": [
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+       { "name": "name", "type": "string", "doc": "Business name" },
+       { "name": "address", "type": "string", "doc": "Address of business" },
+       { "name": "city", "type": "string", "doc": "the city" },
+       { "name": "state", "type": "string", "doc": "2 character state code, if applicable" },
+       { "name": "postal_code", "type": "string", "doc": "the postal code" },
+       { "name": "latitude", "type": "float", "doc": "latitude" },
+       { "name": "longitude", "type": "float", "doc": "longitude" },
+       { "name": "stars", "type": "float", "doc": "stars rating, rounded to half-stars" },
+       { "name": "review_count", "type": "int", "doc": "number of reviews" },
+       { "name": "is_open", "type": "int", "doc": "0 or 1 for closed or open, respectively" },
+       { "name": "attributes", "type": {
+		     "type": "record",
+		     "namespace": "com.minh.avro",
+		     "name": "Business_attrs",
+		     "fields": [
+		       { "name": "RestaurantsTakeOut", "type": "boolean", "doc": "whether a business has take out" },
+		       { "name": "BusinessParking", "type": {
+		       	     "type": "record",
+				     "namespace": "com.minh.avro",
+				     "name": "Business_parking_attr",
+				     "fields": [
+				       { "name": "garage", "type": "boolean", "doc": "Has garage parking" },
+				       { "name": "street", "type": "boolean", "doc": "Has street parking" },
+				       { "name": "validated", "type": "boolean", "doc": "Has validation" },
+				       { "name": "lot", "type": "boolean", "doc": "Has a lot" },
+				       { "name": "valet", "type": "boolean", "doc": "Has valet" }
+				     ]}, "doc": "Parking attributes" }
+		     ]}, "doc": "Business attributes" },
+       { "name": "categories", "type": { "type" : "array", "items": "string"}, "doc": "an array of strings of business categories" },
+       { "name": "hours", "type": {
+		     "type": "record",
+		     "namespace": "com.minh.avro",
+		     "name": "Business_hours",
+		     "fields": [
+		       { "name": "Monday", "type": "string", "doc": "Monday hours" },
+		       { "name": "Tuesday", "type": "string", "doc": "Tuesday hours" },
+		       { "name": "Wednesday", "type": "string", "doc": "Wednesday hours" },
+		       { "name": "Thursday", "type": "string", "doc": "Thursday hours" },
+		       { "name": "Friday", "type": "string", "doc": "Friday hours" },
+		       { "name": "Saturday", "type": "string", "doc": "Saturday hours" },
+		       { "name": "Sunday", "type": "string", "doc": "Sunday hours" }
+		     ]}, "doc": "an object of key day to value hours, hours are using a 24hr clock" }
+     ]
+}

@@ -1,6 +1,7 @@
 package minh.event;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.kafka.clients.producer.MockProducer;
 import org.junit.jupiter.api.Test;

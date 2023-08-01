@@ -1,0 +1,9 @@
+{
+     "type": "record",
+     "namespace": "com.minh.avro",
+     "name": "Checkin",
+     "fields": [
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+       { "name": "date", "type": "string", "doc": "comma-separated list of timestamps for each checkin, each with format YYYY-MM-DD HH:MM:SS" }
+     ]
+}

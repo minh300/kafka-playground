@@ -1,0 +1,12 @@
+{
+     "type": "record",
+     "namespace": "com.minh.avro",
+     "name": "Tip",
+     "fields": [
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+       { "name": "user_id", "type": "string", "doc": "22 character unique string user id" },
+       { "name": "text", "type": "string", "doc": "tip text" },
+       { "name": "date", "type": "string", "doc": "when the tip was written, formatted like YYYY-MM-DD" },
+       { "name": "compliment_count", "type": "int", "doc": "compliment counts" }
+     ]
+}

@@ -1,0 +1,29 @@
+{
+     "type": "record",
+     "namespace": "com.minh.avro",
+     "name": "User",
+     "fields": [
+       { "name": "user_id", "type": "string", "doc": "222 character unique user id" },
+       { "name": "name", "type": "string", "doc": "the users first name" },
+       { "name": "review_count", "type": "int", "doc": "the numbe rof reviews they've written" },
+       { "name": "yelping_since", "type": "string", "doc": "when the user joined yelp, formatted like YYYY-MM-DD" },
+       { "name": "friends", "type": { "type": "array", "items":"string"}, "doc": "array of friend ids" },
+       { "name": "useful", "type": "int", "doc": "number of useful votes" },
+       { "name": "funny", "type": "int", "doc": "number of funny votes" },
+       { "name": "cool", "type": "int", "doc": "number of cool votes" },
+       { "name": "fans", "type": "int", "doc": "number of fans the user has" },
+       { "name": "elite", "type": {"type":"array", "items":"int"}, "doc": "the years the user was an elite, YYYY" },
+       { "name": "average_stars", "type": "float", "doc": "average rating of all reviews" },
+       { "name": "compliment_hot", "type": "int", "doc": "number of hot compliments received by the user" },
+       { "name": "compliment_more", "type": "int", "doc": "number of more compliments received by the user" },
+       { "name": "compliment_profile", "type": "int", "doc": "number of profile compliments received by the user" },
+       { "name": "compliment_cute", "type": "int", "doc": "number of cute compliments received by the user" },
+       { "name": "compliment_list", "type": "int", "doc": "number of list compliments received by the user" },
+       { "name": "compliment_note", "type": "int", "doc": "number of note compliments received by the user" },
+       { "name": "compliment_plain", "type": "int", "doc": "number of plain compliments received by the user" },
+       { "name": "compliment_cool", "type": "int", "doc": "number of cool compliments received by the user" },
+       { "name": "compliment_funny", "type": "int", "doc": "number of funny compliments received by the user" },
+       { "name": "compliment_writer", "type": "int", "doc": "number of writer compliments received by the user" },
+       { "name": "compliment_photos", "type": "int", "doc": "number of photo compliments received by the user" }
+       ]
+}

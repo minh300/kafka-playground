@@ -5,11 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>minh</groupId>
-		<artifactId>KafkaPlayGround</artifactId>
+		<groupId>com.minh</groupId>
+    	<artifactId>melp-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>WikipediaProducer</artifactId>
+	<artifactId>kafka-connect-yelp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
@@ -58,5 +58,30 @@
 		    <artifactId>connect-api</artifactId>
 		    <version>3.5.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.launchdarkly/okhttp-eventsource -->
+		<dependency>
+			<groupId>com.launchdarkly</groupId>
+			<artifactId>okhttp-eventsource</artifactId>
+			<version>4.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter</artifactId>
+		    <version>5.9.1</version>
+		    <scope>test</scope>
+		</dependency> 				
 	</dependencies>
 </project>

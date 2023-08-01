@@ -1,0 +1,16 @@
+{
+     "type": "record",
+     "namespace": "com.minh.avro",
+     "name": "Review",
+     "fields": [
+       { "name": "review_id", "type": "string", "doc": "22 character unique string review id" },
+       { "name": "user_id", "type": "string", "doc": "22 character unique string user id" },
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+       { "name": "stars", "type": "int", "doc": "rating" },
+       { "name": "date", "type": "string", "doc": "date formatted YYYY-MM-DD" },
+       { "name": "text", "type": "string", "doc": "the review itself" },
+       { "name": "useful", "type": "int", "doc": "the number of useful votes received" },
+       { "name": "funny", "type": "int", "doc": "the number of funny votes received" },
+       { "name": "cool", "type": "int", "doc": "the number of cool votes received" }
+     ]
+}
