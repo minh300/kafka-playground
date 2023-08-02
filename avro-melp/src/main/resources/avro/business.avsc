@@ -15,25 +15,24 @@
        { "name": "review_count", "type": "int", "doc": "number of reviews" },
        { "name": "is_open", "type": "int", "doc": "0 or 1 for closed or open, respectively" },
        { "name": "attributes", "type": {
-		     "type": "record",
-		     "namespace": "com.minh.avro",
-		     "name": "Business_attrs",
-		     "fields": [
-		       { "name": "RestaurantsTakeOut", "type": "boolean", "doc": "whether a business has take out" },
-		       { "name": "BusinessParking", "type": {
-		       	     "type": "record",
-				     "namespace": "com.minh.avro",
-				     "name": "Business_parking_attr",
-				     "fields": [
-				       { "name": "garage", "type": "boolean", "doc": "Has garage parking" },
-				       { "name": "street", "type": "boolean", "doc": "Has street parking" },
-				       { "name": "validated", "type": "boolean", "doc": "Has validation" },
-				       { "name": "lot", "type": "boolean", "doc": "Has a lot" },
-				       { "name": "valet", "type": "boolean", "doc": "Has valet" }
-				     ]}, "doc": "Parking attributes" }
+		     "type": "map",
+		     "values": ["string", "boolean", "int" ,
+						  {
+					  	     "type": "record",
+						     "namespace": "com.minh.avro",
+						     "name": "Business_parking_attr",
+						     "fields": [
+						       { "name": "garage", "type": "boolean", "doc": "Has garage parking" },
+						       { "name": "street", "type": "boolean", "doc": "Has street parking" },
+						       { "name": "validated", "type": "boolean", "doc": "Has validation" },
+						       { "name": "lot", "type": "boolean", "doc": "Has a lot" },
+						       { "name": "valet", "type": "boolean", "doc": "Has valet" }
+						     ], 
+						     "doc": "Parking attributes" 
+					     }
 		     ]}, "doc": "Business attributes" },
-       { "name": "categories", "type": { "type" : "array", "items": "string"}, "doc": "an array of strings of business categories" },
-       { "name": "hours", "type": {
+       { "name": "categories", "type": "string", "doc": "a string representing an array of strings of business categories" },
+       { "name": "hours", "type": ["null", {
 		     "type": "record",
 		     "namespace": "com.minh.avro",
 		     "name": "Business_hours",
@@ -45,6 +44,6 @@
 		       { "name": "Friday", "type": "string", "doc": "Friday hours" },
 		       { "name": "Saturday", "type": "string", "doc": "Saturday hours" },
 		       { "name": "Sunday", "type": "string", "doc": "Sunday hours" }
-		     ]}, "doc": "an object of key day to value hours, hours are using a 24hr clock" }
+		     ]}], "default":null, "doc": "an object of key day to value hours, hours are using a 24hr clock" }
      ]
 }
