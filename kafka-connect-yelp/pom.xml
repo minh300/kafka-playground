@@ -36,9 +36,8 @@
                 </goals>
                 <configuration>
                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                     <configuration>
-                        <excludeGroupIds>org.apache.kafka</excludeGroupIds>
-                    </configuration>                 
+                  <excludeArtifactIds>connect-api, kafka-clients</excludeArtifactIds>
+                  <includeScope>compile</includeScope>
                 </configuration>
               </execution>
             </executions>
@@ -48,8 +47,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>minh</groupId>
-			<artifactId>Common</artifactId>
+			<groupId>com.minh</groupId>
+			<artifactId>avro-melp</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.kafka/connect-api -->
@@ -57,6 +56,12 @@
 		    <groupId>org.apache.kafka</groupId>
 		    <artifactId>connect-api</artifactId>
 		    <version>3.5.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.confluent/kafka-connect-avro-data -->
+		<dependency>
+		    <groupId>io.confluent</groupId>
+		    <artifactId>kafka-connect-avro-data</artifactId>
+		    <version>7.4.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
@@ -84,4 +89,12 @@
 		    <scope>test</scope>
 		</dependency> 				
 	</dependencies>
+	
+    <!--necessary to resolve confluent dependencies-->
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>	
 </project>

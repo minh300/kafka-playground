@@ -1,27 +1,24 @@
-package minh.kafka.producer;
-
-import org.apache.kafka.common.config.ConfigDef;
-
+package com.minh.kafka.connect;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
 import org.apache.kafka.connect.source.SourceConnector;
 
-public class WikimediaSource extends SourceConnector {
+public class YelpBusinessDFSourceConnector extends SourceConnector {
     public static String VERSION = "0.0.1";
     public static final String TOPIC_CONFIG = "topic";
-    public static final String URL_CONFIG = "url";
+    public static final String PATH_CONFIG = "path";
     public static final String RECONNECT_TIME_CONFIG = "reconnect.duration";
     
     //config definition object
     private static final ConfigDef CONFIG_DEF = new ConfigDef()
             .define(TOPIC_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The topic to publish data to")
-            .define(URL_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The event stream url to fetch events from")
-            .define(RECONNECT_TIME_CONFIG, ConfigDef.Type.INT, null, ConfigDef.Importance.LOW, "reconnect duration (milliseconds) config for event stream url. defaults to 3 seconds");
+            .define(PATH_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The path of the data file");
 
     private String topic;
     private String uri;
@@ -35,21 +32,21 @@ public class WikimediaSource extends SourceConnector {
 	@Override
 	public void start(Map<String, String> props) {
         // init the configs on start
-        topic = props.get(WikimediaSource.TOPIC_CONFIG);
-        uri = props.get(WikimediaSource.URL_CONFIG);
-        reconnectDuration = props.getOrDefault(WikimediaSource.RECONNECT_TIME_CONFIG, "3000");
+        topic = props.get(YelpBusinessDFSourceConnector.TOPIC_CONFIG);
+        uri = props.get(YelpBusinessDFSourceConnector.PATH_CONFIG);
+        reconnectDuration = props.getOrDefault(YelpBusinessDFSourceConnector.RECONNECT_TIME_CONFIG, "3000");
 	}
 
 	@Override
 	public Class<? extends Task> taskClass() {
-        return WikimediaTask.class;
+        return YelpBusinessDFTask.class;
 	}
 
 	@Override
 	public List<Map<String, String>> taskConfigs(int maxTasks) {
         Map<String, String> config = new HashMap<String,String>();
         config.put(TOPIC_CONFIG, topic);
-        config.put(URL_CONFIG, uri);
+        config.put(PATH_CONFIG, uri);
         config.put(RECONNECT_TIME_CONFIG, reconnectDuration);
         return Collections.singletonList(config);
 	}
