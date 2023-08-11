@@ -16,7 +16,7 @@ public class YelpDFSourceConnectorConfig extends AbstractConfig {
     private static final String TOPIC_DOC = "Topic to write to";
 
     public static final String PATH_CONFIG = "path";
-    private static final String PATH_DOC = "The path to the yelp business data file";
+    private static final String PATH_DOC = "The path to the yelp business data files";
 
     public YelpDFSourceConnectorConfig(ConfigDef config, Map<String, String> parsedConfig) {
         super(config, parsedConfig);

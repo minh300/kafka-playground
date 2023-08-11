@@ -9,20 +9,18 @@ import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.connect.connector.Task;
 import org.apache.kafka.connect.source.SourceConnector;
 
-public class YelpBusinessDFSourceConnector extends SourceConnector {
+public class YelpDFSourceConnector extends SourceConnector {
     public static String VERSION = "0.0.1";
-    public static final String TOPIC_CONFIG = "topic";
+    public static final String TOPIC_CONFIG = "topic";    
     public static final String PATH_CONFIG = "path";
-    public static final String RECONNECT_TIME_CONFIG = "reconnect.duration";
     
     //config definition object
     private static final ConfigDef CONFIG_DEF = new ConfigDef()
             .define(TOPIC_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The topic to publish data to")
-            .define(PATH_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The path of the data file");
+            .define(PATH_CONFIG, ConfigDef.Type.STRING, null, ConfigDef.Importance.HIGH, "The path of the folder of the data file");
 
-    private String topic;
     private String uri;
-    private String reconnectDuration;
+    private String topic;
 
 	@Override
 	public String version() {
@@ -32,14 +30,13 @@ public class YelpBusinessDFSourceConnector extends SourceConnector {
 	@Override
 	public void start(Map<String, String> props) {
         // init the configs on start
-        topic = props.get(YelpBusinessDFSourceConnector.TOPIC_CONFIG);
-        uri = props.get(YelpBusinessDFSourceConnector.PATH_CONFIG);
-        reconnectDuration = props.getOrDefault(YelpBusinessDFSourceConnector.RECONNECT_TIME_CONFIG, "3000");
+        topic = props.get(TOPIC_CONFIG);
+        uri = props.get(PATH_CONFIG);
 	}
 
 	@Override
 	public Class<? extends Task> taskClass() {
-        return YelpBusinessDFTask.class;
+        return YelpDFTask.class;
 	}
 
 	@Override
@@ -47,7 +44,6 @@ public class YelpBusinessDFSourceConnector extends SourceConnector {
         Map<String, String> config = new HashMap<String,String>();
         config.put(TOPIC_CONFIG, topic);
         config.put(PATH_CONFIG, uri);
-        config.put(RECONNECT_TIME_CONFIG, reconnectDuration);
         return Collections.singletonList(config);
 	}
 

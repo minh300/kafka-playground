@@ -1,0 +1,15 @@
+ {
+	 "type": "record",
+	 "namespace": "com.minh.avro",
+	 "name": "Business_hour",
+	 "fields": [
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+	   { "name": "Monday", "type": ["null", "string"], "default":null, "doc": "Monday hours" },
+	   { "name": "Tuesday", "type": ["null", "string"], "default":null, "doc": "Tuesday hours" },
+	   { "name": "Wednesday", "type": ["null", "string"], "default":null, "doc": "Wednesday hours" },
+	   { "name": "Thursday", "type": ["null", "string"], "default":null, "doc": "Thursday hours" },
+	   { "name": "Friday", "type": ["null", "string"], "default":null, "doc": "Friday hours" },
+	   { "name": "Saturday", "type": ["null", "string"], "default":null, "doc": "Saturday hours" },
+	   { "name": "Sunday", "type": ["null", "string"], "default":null, "doc": "Sunday hours" }
+	 ]
+ }

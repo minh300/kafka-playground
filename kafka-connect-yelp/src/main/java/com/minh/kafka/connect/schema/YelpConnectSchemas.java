@@ -5,6 +5,7 @@ import org.apache.kafka.connect.data.Struct;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.minh.avro.Business;
+import com.minh.avro.Business_hour;
 
 import io.confluent.connect.avro.AvroData;
 
@@ -41,49 +42,9 @@ public class YelpConnectSchemas {
 	public static final String SUNDAY_FIELD = "Sunday";
 	
 	public static final Schema BUSINESS_SCHEMA = YelpConnectSchemas.data.toConnectSchema(Business.SCHEMA$);
-	public static final Schema HOURS_SCHEMA = BUSINESS_SCHEMA.field(HOURS_FIELD).schema();
-//	public static Schema ATTRIBUTES_SCHEMA = SchemaBuilder.struct().name(ATTRIBUTES)
-//			.version(1)
-//			.map(Schema.STRING_SCHEMA, null)
-//			.build();
-//
-//	public static Schema BUSINESS_SCHEMA = SchemaBuilder.struct().name(BUSINESS)
-//			.version(1)
-//			.field(BUSINESS_ID_FIELD, Schema.STRING_SCHEMA)
-//			.field(NAME_FIELD, Schema.STRING_SCHEMA)
-//			.field(ADDRESS_FIELD, Schema.STRING_SCHEMA)
-//			.field(CITY_FIELD, Schema.STRING_SCHEMA)
-//			.field(STATE_FIELD, Schema.STRING_SCHEMA)
-//			.field(POSTAL_CODE_FIELD, Schema.STRING_SCHEMA)
-//			.field(LATITUDE_FIELD, Schema.FLOAT32_SCHEMA)
-//			.field(LONGITUDE_FIELD, Schema.FLOAT32_SCHEMA)
-//			.field(STARS_FIELD, Schema.FLOAT32_SCHEMA)
-//			.field(REVIEW_COUNT_FIELD, Schema.INT32_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(ATTRIBUTES_FIELD, ATTRIBUTES_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA)
-//			.field(IS_OPEN_FIELD, Schema.INT16_SCHEMA);
+	public static final Schema HOURS_SCHEMA = YelpConnectSchemas.data.toConnectSchema(Business_hour.SCHEMA$);
 			
 	public static Struct buildBusinessStruct(final JsonNode recordValue){
-
-        // Issue top level fields
-		Struct hours = new Struct(HOURS_SCHEMA);
-
-		boolean hasHours = recordValue.get(HOURS_FIELD)!=null && !recordValue.get(HOURS_FIELD).isNull();
-		if(hasHours) {
-			putIfExist(hours, MONDAY_FIELD, recordValue.get(HOURS_FIELD).get(MONDAY_FIELD));
-			putIfExist(hours, TUESDAY_FIELD, recordValue.get(HOURS_FIELD).get(TUESDAY_FIELD));
-			putIfExist(hours, WEDNESDAY_FIELD, recordValue.get(HOURS_FIELD).get(WEDNESDAY_FIELD));
-			putIfExist(hours, THURSDAY_FIELD, recordValue.get(HOURS_FIELD).get(THURSDAY_FIELD));
-			putIfExist(hours, FRIDAY_FIELD, recordValue.get(HOURS_FIELD).get(FRIDAY_FIELD));
-			putIfExist(hours, SATURDAY_FIELD, recordValue.get(HOURS_FIELD).get(SATURDAY_FIELD));
-			putIfExist(hours, SUNDAY_FIELD, recordValue.get(HOURS_FIELD).get(SUNDAY_FIELD));
-		}
         Struct businessStruct = new Struct(BUSINESS_SCHEMA)
                 .put(BUSINESS_ID_FIELD, recordValue.get(BUSINESS_ID_FIELD).textValue())
                 .put(NAME_FIELD, recordValue.get(NAME_FIELD).textValue())
@@ -98,12 +59,27 @@ public class YelpConnectSchemas {
                 .put(IS_OPEN_FIELD, recordValue.get(IS_OPEN_FIELD).intValue())
               //  .put(ATTRIBUTES_FIELD, null) TODO
                 .put(CATEGORIES_FIELD, recordValue.get(CATEGORIES_FIELD).textValue());
-        if(hasHours) {
-        	businessStruct.put(HOURS_FIELD, hours);
-        }
 
         return businessStruct;
     }
+	
+	public static Struct buildHoursStruct(final JsonNode recordValue){
+		boolean hasHours = recordValue.get(HOURS_FIELD)!=null && !recordValue.get(HOURS_FIELD).isNull();
+		if(hasHours) {
+			Struct hours = new Struct(HOURS_SCHEMA)
+					.put(BUSINESS_ID_FIELD, recordValue.get(BUSINESS_ID_FIELD).textValue());
+
+			putIfExist(hours, MONDAY_FIELD, recordValue.get(HOURS_FIELD).get(MONDAY_FIELD));
+			putIfExist(hours, TUESDAY_FIELD, recordValue.get(HOURS_FIELD).get(TUESDAY_FIELD));
+			putIfExist(hours, WEDNESDAY_FIELD, recordValue.get(HOURS_FIELD).get(WEDNESDAY_FIELD));
+			putIfExist(hours, THURSDAY_FIELD, recordValue.get(HOURS_FIELD).get(THURSDAY_FIELD));
+			putIfExist(hours, FRIDAY_FIELD, recordValue.get(HOURS_FIELD).get(FRIDAY_FIELD));
+			putIfExist(hours, SATURDAY_FIELD, recordValue.get(HOURS_FIELD).get(SATURDAY_FIELD));
+			putIfExist(hours, SUNDAY_FIELD, recordValue.get(HOURS_FIELD).get(SUNDAY_FIELD));
+			return hours;
+		}
+		return null;
+	}
 	
 
 	private static void putIfExist(final Struct struct, final String fieldName, JsonNode node) {

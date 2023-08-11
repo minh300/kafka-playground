@@ -20,11 +20,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minh.event.FileLineEventSource;
 import com.minh.event.IEventSource;
+import com.minh.event.processor.IEventProccesor;
+import com.minh.event.processor.ProcessorUtil;
 import com.minh.kafka.connect.schema.YelpConnectSchemas;
 import com.minh.kafka.connect.util.VersionUtil;
 
-public class YelpBusinessDFTask extends SourceTask {
-	private static final Logger log = LoggerFactory.getLogger(YelpBusinessDFTask.class);
+public class YelpDFTask extends SourceTask {
+	private static final Logger log = LoggerFactory.getLogger(YelpDFTask.class);
 	private static final String OFFSET_STR = "offset";
 	private static final String SOURCE_STR = "source";
 	private static final String YELP_STR = "yelp";
@@ -52,29 +54,25 @@ public class YelpBusinessDFTask extends SourceTask {
 		String topic = config.getTopic();
 		String path = config.getPath();
 		// TODO batch size customization
-
-		ObjectMapper mapper = new ObjectMapper();
-		processor = new FileLineEventSource(new File(path), offset) {
-			@Override
-			public void onEvent(final String event) {
-				JsonNode eventAsJsonNode;
-				try {
-					eventAsJsonNode = mapper.readTree(event);
-					queue.add(new SourceRecord(Collections.singletonMap(SOURCE_STR, YELP_STR),
-							Collections.singletonMap(OFFSET_STR, offset), topic, null, Schema.STRING_SCHEMA,
-							eventAsJsonNode.get(YelpConnectSchemas.BUSINESS_ID_FIELD).asText(), YelpConnectSchemas.BUSINESS_SCHEMA,
-							YelpConnectSchemas.buildBusinessStruct(eventAsJsonNode), System.currentTimeMillis()));// TODO do we want to use
-																								// this timestamp?
-					offset++;
-				} catch (Exception e) {
-					log.error("Unable to read event: " + event, e);
+		File dfSet = new File(path, topic);
+		if (dfSet.exists()) {
+			processor = new FileLineEventSource(new File(path, topic), offset) {
+				@Override
+				public void onEvent(final String event) {
+					IEventProccesor processor = ProcessorUtil.fromString(topic);
+					try {
+						processor.process(event, offset, queue);
+						offset++;
+					} catch (Exception e) {
+						log.error("Unable to read event: " + event, e);
+					}
 				}
+			};
+			try {
+				processor.start();
+			} catch (Exception e) {
+				throw new ConnectException("unable to start processor", e);
 			}
-		};
-		try {
-			processor.start();
-		} catch (Exception e) {
-			throw new ConnectException("unable to start processor", e);
 		}
 	}
 

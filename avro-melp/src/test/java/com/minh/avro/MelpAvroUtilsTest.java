@@ -46,7 +46,6 @@ public class MelpAvroUtilsTest {
 		assertEquals("Acupuncture", categories[3]);
 		assertEquals("Health & Medical", categories[4]);
 		assertEquals("Nutritionists", categories[5]);
-		assertNull(business.getHours());
 	}
 	
     
