@@ -1,6 +1,6 @@
  {
 	 "type": "record",
-	 "namespace": "com.minh.avro",
+	 "namespace": "com.melp.avro",
 	 "name": "Business_hour",
 	 "fields": [
        { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },

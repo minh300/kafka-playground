@@ -5,11 +5,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>minh</groupId>
+		<groupId>melp</groupId>
 		<artifactId>KafkaPlayGround</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>minh</groupId>
+	<groupId>melp</groupId>
 	<artifactId>Common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Common</name>

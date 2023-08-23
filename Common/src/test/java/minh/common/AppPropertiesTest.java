@@ -1,4 +1,4 @@
-package minh.common;
+package melp.common;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

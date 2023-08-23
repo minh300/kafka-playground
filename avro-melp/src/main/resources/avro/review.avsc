@@ -1,6 +1,6 @@
 {
      "type": "record",
-     "namespace": "com.minh.avro",
+     "namespace": "com.melp.avro",
      "name": "Review",
      "fields": [
        { "name": "review_id", "type": "string", "doc": "22 character unique string review id" },

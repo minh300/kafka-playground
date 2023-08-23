@@ -1,6 +1,6 @@
 {
      "type": "record",
-     "namespace": "com.minh.avro",
+     "namespace": "com.melp.avro",
      "name": "User",
      "fields": [
        { "name": "user_id", "type": "string", "doc": "222 character unique user id" },
