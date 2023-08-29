@@ -14,7 +14,12 @@ import org.apache.avro.specific.SpecificData;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.commons.compress.utils.IOUtils;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import static com.melp.avro.BusinessConst.*;
+
 public class MelpAvroUtils {
+    private static final ObjectMapper mapper = new ObjectMapper();
 	private static final String BUSINESS_STRING = "business";
 	private static final String CHECKIN_STRING = "checkin";
 	private static final String REVIEW_STRING = "review";
@@ -54,8 +59,29 @@ public class MelpAvroUtils {
 		}
 	}
 	
+	//TODO unit test
 	public static Business jsonToBusinessAvro(final String genericRecordStr) throws IOException {
+	    JsonNode node = mapper.readTree(genericRecordStr);
+		return new Business(node.get(BUSINESS_ID_FIELD).asText(),
+				node.get(NAME_FIELD).asText(), node.get(ADDRESS_FIELD).asText(), node.get(CITY_FIELD).asText(),
+				node.get(STATE_FIELD).asText(), node.get(POSTAL_CODE_FIELD).asText(),
+				node.get(LATITUDE_FIELD).floatValue(),
+				node.get(LONGITUDE_FIELD).floatValue(), node.get(STARS_FIELD).floatValue(), 
+				node.get(REVIEW_COUNT_FIELD).intValue(), node.get(IS_OPEN_FIELD).intValue(), node.get(CATEGORIES_FIELD).asText());
+	}
+	
+	public static Business avroJsonToBusinessAvro(final String genericRecordStr) throws IOException {
 		return (Business) jsonToAvro(genericRecordStr, BUSINESS_SCHEMA);
+	}
+	
+	//TODO unit test
+	public static Business_hour jsonToBusinessHourAvro(final String genericRecordStr) throws IOException {
+	    JsonNode node = mapper.readTree(genericRecordStr);
+		return new Business_hour(node.get(BUSINESS_ID_FIELD).asText(),
+				node.get(MONDAY_FIELD).asText(), node.get(TUESDAY_FIELD).asText(), node.get(WEDNESDAY_FIELD).asText(),
+				node.get(THURSDAY_FIELD).asText(), node.get(FRIDAY_FIELD).asText(),
+				node.get(SATURDAY_FIELD).asText(),
+				node.get(SUNDAY_FIELD).asText());
 	}
 	
 	public static Checkin jsonToCheckInAvro(final String genericRecordStr) throws IOException {

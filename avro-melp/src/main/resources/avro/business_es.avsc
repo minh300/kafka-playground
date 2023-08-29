@@ -1,0 +1,38 @@
+{
+     "type": "record",
+     "namespace": "com.melp.avro",
+     "name": "Business_ES",
+     "fields": [
+       { "name": "business_id", "type": "string", "doc": "22 character unique string business id" },
+       { "name": "name", "type": "string", "doc": "Business name" },
+       { "name": "address", "type": "string", "doc": "Address of business" },
+       { "name": "city", "type": "string", "doc": "the city" },
+       { "name": "state", "type": "string", "doc": "2 character state code, if applicable" },
+       { "name": "postal_code", "type": "string", "doc": "the postal code" },
+       { "name": "stars", "type": "float", "doc": "stars rating, rounded to half-stars" },
+       { "name": "review_count", "type": "int", "doc": "number of reviews" },
+       { "name": "is_open", "type": "int", "doc": "0 or 1 for closed or open, respectively" },
+       { "name": "categories", "type": ["null", "string"],  "doc": "a string representing an array of strings of business categories" },
+       { "name": "hours", "type": {
+     		"type": "record",
+     		"namespace": "com.melp.avro",
+     		"name": "Business_hour_ES",
+     		"fields": [
+			   { "name": "Monday", "type": ["null", "string"], "default":null, "doc": "Monday hours" },
+			   { "name": "Tuesday", "type": ["null", "string"], "default":null, "doc": "Tuesday hours" },
+			   { "name": "Wednesday", "type": ["null", "string"], "default":null, "doc": "Wednesday hours" },
+			   { "name": "Thursday", "type": ["null", "string"], "default":null, "doc": "Thursday hours" },
+			   { "name": "Friday", "type": ["null", "string"], "default":null, "doc": "Friday hours" },
+			   { "name": "Saturday", "type": ["null", "string"], "default":null, "doc": "Saturday hours" },
+			   { "name": "Sunday", "type": ["null", "string"], "default":null, "doc": "Sunday hours" }
+     		]}, "doc": "an object of key day to value hours, hours are using a 24hr clock" },
+       { "name": "location", "type": {
+     		"type": "record",
+     		"namespace": "com.melp.avro",
+     		"name": "Location",
+     		"fields": [
+       			{ "name": "lat", "type": "float", "doc": "latitude" },
+       			{ "name": "lon", "type": "float", "doc": "longitude" }
+     		]}, "doc": "latitude and longitude" }  		
+     ]
+}

@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 public class MelpAvroUtilsTest {
 	@Test
-	public void jsonToBusinessTest() throws IOException {
-		Business business  = MelpAvroUtils.jsonToBusinessAvro(
+	public void avroJsonToBusinessTest() throws IOException {
+		Business business  = MelpAvroUtils.avroJsonToBusinessAvro(
 				"{\"business_id\":\"Pns2l4eNsfO8kk83dixA6A\","
 				+ "\"name\":\"Abby Rappoport, LAC, CMQ\","
 				+ "\"address\":\"1616 Chapala St, Ste 2\","
