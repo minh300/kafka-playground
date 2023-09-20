@@ -50,6 +50,17 @@
                             <createSetters>false</createSetters>
                             <enableDecimalLogicalType>true</enableDecimalLogicalType>
                             <fieldVisibility>private</fieldVisibility>
+                            
+                      <!--  use this to reuse classes
+                      		 <includes>
+                                <include>**/*.avro</include>
+                            </includes>
+                            <imports>
+                                <import>${project.basedir}/src/main/avro/location.avsc</import>
+                                <import>${project.basedir}/src/main/avro/business_es.avsc</import>
+                            </imports>
+                            
+                            -->
                         </configuration>
                     </execution>
                 </executions>

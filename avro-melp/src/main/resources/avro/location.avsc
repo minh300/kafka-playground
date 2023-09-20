@@ -1,0 +1,9 @@
+{
+	"type": "record",
+	"namespace": "com.melp.avro",
+	"name": "Location",
+	"fields": [
+		{ "name": "lat", "type": "float", "doc": "latitude" },
+		{ "name": "lon", "type": "float", "doc": "longitude" }
+	]
+}
